@@ -1,10 +1,17 @@
 import tkinter as tk
 from tkinterdnd2 import DND_FILES, TkinterDnD
 
+def center_window(window, width, height):
+    window.update_idletasks()
+    x = (window.winfo_screenwidth() - width) // 2
+    y = (window.winfo_screenheight() - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
+
 def init_window(on_file_dropped):
     root = TkinterDnD.Tk()
     root.title("Hospital Bill Analyzer")
-    root.geometry("700x500")
+    center_window(root, 700, 500)
     root.configure(bg="#f4f7fb")
 
     tk.Label(
@@ -69,8 +76,11 @@ def handle_drop(event, on_file_dropped):
 def show_loading_dots(parent=None):
     win = tk.Toplevel(parent) if parent else tk.Tk()
     win.title("Receipt Review")
-    win.geometry("700x500")
+    center_window(win, 700, 500)
     win.resizable(False, False)
+    if parent:
+        win.transient(parent)
+        win.lift()
 
     label = tk.Label(
         win,
