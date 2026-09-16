@@ -4,7 +4,6 @@ import ui
 import fitz
 import os
 import threading
-import sys
 
 
 REPORT_CSS = """
